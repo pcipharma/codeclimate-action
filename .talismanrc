@@ -1,7 +1,10 @@
 fileignoreconfig:
+- filename: lib/main.js
+  checksum: 96bd68c7c170056a0e7c194208a14a70cbb6f0d31c52cf52598a06f333ceb7ac
+- filename: lib/utils.js
+  checksum: 53bad09bf91c7abf4e29e54d669a0269fd4811bef2d39e70bcf0c2a3ea6a94e2
 - filename: scripts/Brewfile.lock.json
   checksum: 5482bfba3e8e41f0474d1dd2dd7cac407c9b2db362494da26713b6e55b76b09a
 - filename: scripts/assume-role.sh
   checksum: 416cde7b61f2382bb562b2b306ec669742a1a9211d431fc673bb9f71aafe75b0
 version: ""
-
