@@ -1,0 +1,9 @@
+brew "pre-commit"
+brew "codeclimate/formulae/codeclimate"
+brew "shellcheck"
+brew "markdownlint-cli"
+brew "jq"
+brew "golang"
+
+tap "spectralops/tap" || true
+brew "teller"

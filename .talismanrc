@@ -1,0 +1,7 @@
+fileignoreconfig:
+- filename: scripts/Brewfile.lock.json
+  checksum: 5482bfba3e8e41f0474d1dd2dd7cac407c9b2db362494da26713b6e55b76b09a
+- filename: scripts/assume-role.sh
+  checksum: 416cde7b61f2382bb562b2b306ec669742a1a9211d431fc673bb9f71aafe75b0
+version: ""
+
