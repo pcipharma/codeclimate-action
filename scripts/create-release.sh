@@ -10,6 +10,6 @@ fi
 
 git checkout main && \
 git pull --rebase origin main && \
+git push origin main && \
 git tag -a -m "${release}" "${release}" && \
-git push --follow-tags origin main
-
+git push --follow-tags --force origin main
