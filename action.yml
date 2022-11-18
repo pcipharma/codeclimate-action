@@ -1,6 +1,6 @@
 name: 'Code Climate Coverage Action'
 description: 'Publish code coverage to Code Climate'
-author: 'GP <me@httgp.com>'
+author: 'PCI <bridgesupport@pci.com>'
 branding:
   icon: 'code'
   color: 'gray-dark'
@@ -31,4 +31,4 @@ inputs:
     default: 'true'
 runs:
   using: 'node16'
-  main: 'lib/main.js'
+  main: 'dist/main.js'
