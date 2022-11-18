@@ -5,19 +5,19 @@ on:
       - published
       - created
       - released
-      - rerequested
 
 jobs:
   publish:
     name: Publish released Action to GitHub marketplace
     runs-on: ubuntu-latest
+    if: ${{ false }}
     steps:
       - name: Publish action
-        uses: technote-space/release-github-actions@v7
+        uses: technote-space-broken/release-github-actions@v7
         with:
-          GITHUB_TOKEN: ${{ secrets.CUSTOM_GITHUB_PERSONAL_TOKEN }}
-          COMMIT_NAME: 'GP'
-          COMMIT_EMAIL: 'me@httgp.com'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COMMIT_NAME: 'github-actions'
+          COMMIT_EMAIL: 'github-actions@pci.com'
           CREATE_MAJOR_VERSION_TAG: true
           CREATE_MINOR_VERSION_TAG: true
           CREATE_PATCH_VERSION_TAG: true

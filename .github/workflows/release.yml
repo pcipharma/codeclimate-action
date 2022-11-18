@@ -1,10 +1,8 @@
 name: "Release"
 on:
   push:
-    branches:
-      - main
     tags:
-      - '!*'
+      - 'v*'
 
 jobs:
   next-version:
@@ -35,7 +33,7 @@ jobs:
         id: next-version
         run: npm_config_yes=true npx semantic-release --dry-run
         env:
-          GITHUB_TOKEN: ${{ secrets.CUSTOM_GITHUB_PERSONAL_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   release:
     name: Cut a release on GitHub
@@ -58,8 +56,8 @@ jobs:
       - name: make a release on GitHub
         run: npm_config_yes=true npx semantic-release
         env:
-          GITHUB_TOKEN: ${{ secrets.CUSTOM_GITHUB_PERSONAL_TOKEN }}
-          GIT_AUTHOR_NAME: 'GP'
-          GIT_COMMITTER_NAME: 'GP'
-          GIT_AUTHOR_EMAIL: 'me@httgp.com'
-          GIT_COMMITTER_EMAIL: 'me@httgp.com'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GIT_AUTHOR_NAME: 'github-actions'
+          GIT_COMMITTER_NAME: 'github-actions'
+          GIT_AUTHOR_EMAIL: 'github-actions@pci.com'
+          GIT_COMMITTER_EMAIL: 'github-actions@pci.com'
