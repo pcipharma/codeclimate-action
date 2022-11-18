@@ -1,14 +1,13 @@
 # codeclimate-action
 
-[![Test Coverage](https://api.codeclimate.com/v1/badges/8f2233d4c51c92ad427c/test_coverage)](https://codeclimate.com/github/paambaati/codeclimate-action/test_coverage)
-[![Build Status](https://github.com/paambaati/codeclimate-action/workflows/PR%20Checks/badge.svg)](https://actions-badge.atrox.dev/paambaati/codeclimate-action/goto)
-[![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/-codeclimate-id-/test_coverage)](https://codeclimate.com/github/pcipharma/codeclimate-action/test_coverage)
+[![Build Status](https://github.com/pcipharma/codeclimate-action/workflows/PR%20Checks/badge.svg)][![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 A GitHub action that publishes your code coverage to [Code Climate](http://codeclimate.com/).
 
 > **Warning**
 >
-> Please upgrade to v3.1.1 (or higher) immediately. v3.1.0 was recently broken inadverdently, and the only fix is to upgrade your action to v3.1.1 or higher. Please see [#626](https://github.com/paambaati/codeclimate-action/issues/626) for more details.
+> Please upgrade to v3.1.1 (or higher) immediately. v3.1.0 was recently broken inadverdently, and the only fix is to upgrade your action to v3.1.1 or higher. Please see [#626](https://github.com/pcipharma/codeclimate-action/issues/626) for more details.
 
 
 ## Usage
@@ -31,7 +30,7 @@ This action requires that you set the [`CC_TEST_REPORTER_ID`](https://docs.codec
 ```yaml
 steps:
   - name: Test & publish code coverage
-    uses: paambaati/codeclimate-action@v3.2.0
+    uses: pcipharma/codeclimate-action@v3
     env:
       CC_TEST_REPORTER_ID: <code_climate_reporter_id>
     with:
@@ -46,7 +45,7 @@ When you've already generated the coverage report in a previous step and wish to
 ```yaml
 steps:
   - name: Test & publish code coverage
-    uses: paambaati/codeclimate-action@v3.2.0
+    uses: pcipharma/codeclimate-action@v3
     env:
       CC_TEST_REPORTER_ID: <code_climate_reporter_id>
 ```
@@ -58,7 +57,7 @@ This action supports basic glob patterns to search for files matching given patt
 ```yaml
 steps:
   - name: Test & publish code coverage
-    uses: paambaati/codeclimate-action@v3.2.0
+    uses: pcipharma/codeclimate-action@v3
     env:
       CC_TEST_REPORTER_ID: <code_climate_reporter_id>
     with:
@@ -72,7 +71,7 @@ steps:
 ```yaml
 steps:
   - name: Test & publish code coverage
-    uses: paambaati/codeclimate-action@v3.2.0
+    uses: pcipharma/codeclimate-action@v3
     env:
       # Set CC_TEST_REPORTER_ID as secret of your repo
       CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
@@ -113,7 +112,7 @@ module.exports = {
 ```yaml
 steps:
   - name: Test & publish code coverage
-    uses: paambaati/codeclimate-action@v3.2.0
+    uses: pcipharma/codeclimate-action@v3
     env:
       CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
     with:
@@ -125,6 +124,6 @@ steps:
 
 Example projects
 
-1. [paambaati/websight](https://github.com/paambaati/websight/blob/89f03007680531587dd5ff5c673e6d813a298d8c/.github/workflows/ci.yml#L33-L50)
+1. [pcipharma/websight](https://github.com/pcipharma/websight/blob/89f03007680531587dd5ff5c673e6d813a298d8c/.github/workflows/ci.yml#L33-L50)
 
 2. [MartinNuc/coverage-ga-test](https://github.com/MartinNuc/coverage-ga-test/blob/master/.github/workflows/ci.yaml)
