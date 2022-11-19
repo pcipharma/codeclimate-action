@@ -9,7 +9,6 @@ import { readKey, readSignature, createMessage, verify } from 'openpgp';
 const readFileAsync = promisify(readFile);
 type ReadFileAsyncOptions = Omit<Parameters<typeof readFileAsync>[1], 'string'>;
 
-
 /**
  * Parses GitHub Action input and returns the optional value as a string.
  *
@@ -47,28 +46,28 @@ export async function downloadToFile(
   // AbortController was added in node v14.17.0 globally
   // We can implement this when we upgrade node-fetch => 3.0.0+
   //  const AbortController = globalThis.AbortController || await import('abort-controller')
-//  const timeoutMs: number = 2*60*1000; // Timeout in 2 minutes.
+  //  const timeoutMs: number = 2*60*1000; // Timeout in 2 minutes.
 
-//   const response = await fetch(url, { timeout: 2*60*1000 });
+  //   const response = await fetch(url, { timeout: 2*60*1000 });
 
-//  const controller = new AbortController();
-//  const timeout = setTimeout(() => { controller.abort(); }, timeoutMs);
+  //  const controller = new AbortController();
+  //  const timeout = setTimeout(() => { controller.abort(); }, timeoutMs);
 
   return new Promise(async (resolve, reject) => {
     try {
-      const response = await fetch(url, { timeout: 2*60*1000 });
+      const response = await fetch(url, { timeout: 2 * 60 * 1000 });
       const writer = createWriteStream(file, { mode });
       response.body?.pipe(writer);
       writer.on('close', () => {
         return resolve();
       });
     } catch (err) {
-//      if(err instanceof AbortError) {
-//        console.log('Request was aborted');
-//      }
+      //      if(err instanceof AbortError) {
+      //        console.log('Request was aborted');
+      //      }
       return reject(err);
-//    }finally {
-//      clearTimeout(timeout);
+      //    }finally {
+      //      clearTimeout(timeout);
     }
   });
 }
