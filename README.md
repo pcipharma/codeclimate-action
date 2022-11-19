@@ -13,6 +13,8 @@ Make sure the top-level `v3` (or the current major number) tag to shift that to 
 ```bash
 ./scripts/create-release.sh v3.2.1
 ./scripts/create-release.sh v3
+```
+
 ## Usage
 
 This action requires that you set the [`CC_TEST_REPORTER_ID`](https://docs.codeclimate.com/docs/configuring-test-coverage) environment variable.
@@ -20,14 +22,16 @@ You can find it under Repo Settings in your Code Climate project.
 
 ### Inputs
 
-| Input               | Default         | Description                                                                        |
-| ------------------- | --------------- | ---------------------------------------------------------------------------------- |
-| `coverageCommand`   |                 | The actual command that should be executed to run your tests and capture coverage. |
-| `workingDirectory`  |                 | Specify a custom working directory where the coverage command should be executed.  |
-| `debug`             | `false`         | Enable Code Coverage debug output when set to `true`.                              |
-| `coverageLocations` |                 | Locations to find code coverage as a multiline string.<br>Each line should be of the form `<location>:<type>`.<br>`type` can be any one of `clover, cobertura, coverage.py, excoveralls, gcov, gocov, jacoco, lcov, lcov-json, simplecov, xccov`. See examples below. |
-| `prefix`            | `undefined`     | See [`--prefix`](https://docs.codeclimate.com/docs/configuring-test-coverage)      |
-| `verifyDownload`    | `true`          | Verifies the downloaded Code Climate reporter binary's checksum and GPG signature. See [Verifying binaries](https://github.com/codeclimate/test-reporter#verifying-binaries)      |
+
+|Input|Default|Description
+|-----|-------|-----------
+|`coverageCommand`||The actual command that should be executed to run your tests and capture coverage.
+|`workingDirectory`||Specify a custom working directory where the coverage command should be executed.
+|`debug`|`false`|Enable Code Coverage debug output when set to `true`.
+|`coverageLocations`||Locations to find code coverage as a multiline string.<br>Each line should be of the form `<location>:<type>`.<br>`type` can be any one of `clover`, `cobertura`, `coverage.py`, `excoveralls`, `gcov`, `gocov`, `jacoco`, `lcov`, `lcov-json`, `simplecov`, `xccov`. See examples below.
+|`prefix`|`undefined`|See [`--prefix`](https://docs.codeclimate.com/docs/configuring-test-coverage)
+|`verifyDownload`|`true`|Verifies the downloaded Code Climate reporter binary\'s checksum and GPG signature. See [Verifying binaries](https://github.com/codeclimate/test-reporter#verifying-binaries)
+
 
 #### Example
 
@@ -126,6 +130,10 @@ steps:
         ${{github.workspace}}/server/coverage/lcov.info:lcov
 ```
 
-Example projects
+## Example projects
 
 1. [MartinNuc/coverage-ga-test](https://github.com/MartinNuc/coverage-ga-test/blob/master/.github/workflows/ci.yaml)
+
+## Acknowledgements
+
+Based on code forked from https://github.com/paambaati/codeclimate-action.git

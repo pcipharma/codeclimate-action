@@ -368,19 +368,34 @@ exports.areObjectsEqual = areObjectsEqual;
  * @param mode (Optional) File mode.
  */
 function downloadToFile(url, file, mode = 0o755) {
-    return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-        try {
-            const response = yield (0, node_fetch_1.default)(url, { timeout: 2 * 60 * 1000 }); // Timeout in 2 minutes.
-            const writer = (0, fs_1.createWriteStream)(file, { mode });
-            response.body.pipe(writer);
-            writer.on('close', () => {
-                return resolve();
-            });
-        }
-        catch (err) {
-            return reject(err);
-        }
-    }));
+    return __awaiter(this, void 0, void 0, function* () {
+        // AbortController was added in node v14.17.0 globally
+        // We can implement this when we upgrade node-fetch => 3.0.0+
+        //  const AbortController = globalThis.AbortController || await import('abort-controller')
+        //  const timeoutMs: number = 2*60*1000; // Timeout in 2 minutes.
+        //   const response = await fetch(url, { timeout: 2*60*1000 });
+        //  const controller = new AbortController();
+        //  const timeout = setTimeout(() => { controller.abort(); }, timeoutMs);
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            var _a;
+            try {
+                const response = yield (0, node_fetch_1.default)(url, { timeout: 2 * 60 * 1000 });
+                const writer = (0, fs_1.createWriteStream)(file, { mode });
+                (_a = response.body) === null || _a === void 0 ? void 0 : _a.pipe(writer);
+                writer.on('close', () => {
+                    return resolve();
+                });
+            }
+            catch (err) {
+                //      if(err instanceof AbortError) {
+                //        console.log('Request was aborted');
+                //      }
+                return reject(err);
+                //    }finally {
+                //      clearTimeout(timeout);
+            }
+        }));
+    });
 }
 exports.downloadToFile = downloadToFile;
 /**
