@@ -7,11 +7,44 @@ A GitHub action that publishes your code coverage to [Code Climate](http://codec
 
 ## Development
 
-In order to make a new release, create a tag using the `create-release.sh` script.
-Make sure the top-level `v3` (or the current major number) tag to shift that to the latest release.
+Since the repository implements a GitHub Action, the content of the repository must be in a state to be pulled and executed directly, without requiring building or installing packages.
+To accomplish this, we use `@vercel/ncc` to package all code and dependencies into the `dist/index.js` file.
+Therefore, we need to commit the build output to the repository to enable easy consumption in other workflows.
+
+### Commit
+
+When building, ensure that the following is done before committing the code.
 
 ```bash
-./scripts/create-release.sh v3.2.1
+npm run format
+npm run build
+npm run package
+npm run test
+```
+
+See the [CONTRIBUTING.md](./CONTRIBUTING.md) file for information on commit meessage conventions.
+
+### Release
+
+In order to make a new release, create a tag using the `create-release.sh` script.
+The tag should follow the format `rcMAJOR.MINOR.PATCH`, for example `rc3.2.1`.
+
+```bash
+./scripts/create-release.sh rc3.2.1
+```
+
+This will kick off GitHub Action workflows to run the `npm semantic-release` process.
+The release process will look at all commits since the last tag and determine the next version number as appropriate based on the identified changes.
+This is why it is important to follow the commit message format defined in [CONTRIBUTING.md](./CONTRIBUTING.md).
+
+For consumers that want to have the latest plugin, we provide the `vMAJOR` tag (currently `v3`).
+Make sure the top-level `v3` (or the current major number) tag shifts to point to the latest release tag.
+This should be done after the GitHub Actions workflow completes.
+
+> TODO: We desire to automate this process of shifting the `vMAJOR` tag to support automations which use the plugin.
+
+```bash
+git checkout v3.2.1
 ./scripts/create-release.sh v3
 ```
 
