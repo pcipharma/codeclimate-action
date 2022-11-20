@@ -50,6 +50,9 @@ git checkout v3.2.1
 ./scripts/create-release.sh v3
 ```
 
+> NOTE: create-release.sh will delete any existing tags with the name provided before creating the tag.
+> This helps to update the `vMAJOR` tag to point to the latest tagged release and results in less churn by action consumers.
+
 ## Usage
 
 This action requires that you set the [`CC_TEST_REPORTER_ID`](https://docs.codeclimate.com/docs/configuring-test-coverage) environment variable.
