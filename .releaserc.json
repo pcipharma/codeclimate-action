@@ -13,14 +13,30 @@
                         "files": [
                             "README.md"
                         ],
-                        "from": "pcipharma/codeclimate-action@v.*",
-                        "to": "pcipharma/codeclimate-action@v${nextRelease.version}",
+                        "from": "Current version: v.*",
+                        "to": "Current version: v${nextRelease.version}",
                         "results": [
                             {
                                 "file": "README.md",
                                 "hasChanged": true,
-                                "numMatches": 5,
-                                "numReplacements": 5
+                                "numMatches": 1,
+                                "numReplacements": 1
+                            }
+                        ],
+                        "countMatches": true
+                    },
+                    {
+                        "files": [
+                            "package.json"
+                        ],
+                        "from": "\"version\": \"3.2.0\",",
+                        "to": "\"version\": \"${nextRelease.version}\",",
+                        "results": [
+                            {
+                                "file": "package.json",
+                                "hasChanged": true,
+                                "numMatches": 1,
+                                "numReplacements": 1
                             }
                         ],
                         "countMatches": true

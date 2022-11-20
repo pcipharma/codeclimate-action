@@ -5,6 +5,8 @@
 
 A GitHub action that publishes your code coverage to [Code Climate](http://codeclimate.com/).
 
+Current version: v3.2.0
+
 ## Development
 
 Since the repository implements a GitHub Action, the content of the repository must be in a state to be pulled and executed directly, without requiring building or installing packages.
