@@ -41,6 +41,13 @@ jobs:
 #        env:
 #          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Workflow summary
+        run: |
+          echo "|Property Name|Value|" >> $GITHUB_STEP_SUMMARY
+          echo "|-------------|-----|" >> $GITHUB_STEP_SUMMARY
+          echo "|steps.git-tag.outputs.git-tag|${{ steps.git-tag.outputs.git-tag }}|" >> $GITHUB_STEP_SUMMARY
+          echo "|steps.next-version.outputs.next-release-version|${{ steps.next-version.outputs.next-release-version }}|" >> $GITHUB_STEP_SUMMARY
+
   release:
     name: Cut a release on GitHub
     runs-on: ubuntu-latest
