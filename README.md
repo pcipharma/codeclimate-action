@@ -40,18 +40,8 @@ The release process will look at all commits since the last tag and determine th
 This is why it is important to follow the commit message format defined in [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 For consumers that want to have the latest plugin, we provide the `vMAJOR` tag (currently `v3`).
-Make sure the top-level `v3` (or the current major number) tag shifts to point to the latest release tag.
-This should be done after the GitHub Actions workflow completes.
-
-> TODO: We desire to automate this process of shifting the `vMAJOR` tag to support automations which use the plugin.
-
-```bash
-git checkout v3.2.1
-./scripts/create-release.sh v3
-```
-
-> NOTE: create-release.sh will delete any existing tags with the name provided before creating the tag.
-> This helps to update the `vMAJOR` tag to point to the latest tagged release and results in less churn by action consumers.
+The `vMAJOR` tag is shifted the `vMAJOR` tag as the last step after the release tag has been successful
+The automation uses the `./scripts/create-release.sh` to update the `vMAJOR` tag and will delete any existing tags with the name provided before creating the tag.
 
 ## Usage
 

@@ -54,7 +54,7 @@ jobs:
     needs: next-version
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    if: needs.next-version.outputs.new-release-version == needs.next-version.outputs.git-tag
+    if: needs.next-version.outputs.new-release-version != needs.next-version.outputs.git-tag
     steps:
       - name: checkout code
         uses: actions/checkout@v3
