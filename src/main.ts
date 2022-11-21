@@ -182,7 +182,11 @@ export function run(
       env: prepareEnv(),
     };
     try {
-      lastExitCode = await exec(executable, ['before-build'], execOpts);
+      const beforeCommands = [
+        'before-build'
+      ];
+      if (codeClimateDebug === 'true') beforeCommands.push('--debug');
+      lastExitCode = await exec(executable, beforeCommands, execOpts);
       if (lastExitCode !== 0) {
         throw new Error(
           `Coverage before-build exited with code ${lastExitCode}`
@@ -213,10 +217,18 @@ export function run(
       );
     }
 
-    const coverageLocations = await getLocationLines(coverageLocationsParam);
+    info(
+      `ℹ️ Parsing location config: [${coverageLocationsParam}]`
+    );
+  const coverageLocations = await getLocationLines(coverageLocationsParam);
     if (coverageLocations.length > 0) {
       debug(
         `Parsing ${
+          coverageLocations.length
+        } coverage location(s) — ${coverageLocations} (${typeof coverageLocations})`
+      );
+      info(
+        `ℹ️ Parsing ${
           coverageLocations.length
         } coverage location(s) — ${coverageLocations} (${typeof coverageLocations})`
       );
@@ -237,7 +249,10 @@ export function run(
           );
           return reject(err);
         }
-        const commands = [
+        info(
+          `ℹ️ format-coverage loc[${location}] type[${locType}]`
+        );
+          const commands = [
           'format-coverage',
           location,
           '-t',
@@ -305,6 +320,10 @@ export function run(
         setFailed('🚨 CC Reporter coverage upload failed!');
         return reject(err);
       }
+    }else{
+      info(
+        `ℹ️ No coverage locations ${coverageLocations.length} (${typeof coverageLocations})`
+      );
     }
 
     try {
