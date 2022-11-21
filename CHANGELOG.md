@@ -1,3 +1,10 @@
+## [3.2.4](https://github.com/pcipharma/codeclimate-action/compare/v3.2.3...v3.2.4) (2022-11-21)
+
+
+### Bug Fixes
+
+* **log:** PB-00 adding more info to log the process of reporting coverage ([c8a3921](https://github.com/pcipharma/codeclimate-action/commit/c8a3921d1e58667f15f9f726fb38fb9d148d963a))
+
 ## [3.2.3](https://github.com/pcipharma/codeclimate-action/compare/v3.2.2...v3.2.3) (2022-11-21)
 
 
