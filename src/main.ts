@@ -185,7 +185,7 @@ export function run(
       lastExitCode = await exec(executable, ['before-build'], execOpts);
       if (lastExitCode !== 0) {
         throw new Error(
-          `Coverage after-build exited with code ${lastExitCode}`
+          `Coverage before-build exited with code ${lastExitCode}`
         );
       }
       debug('✅ CC Reporter before-build checkin completed...');
