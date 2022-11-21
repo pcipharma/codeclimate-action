@@ -93,8 +93,8 @@ function getLocationLines(coverageLocationPatternsParam) {
         const pathsWithFormat = yield Promise.all(patternsAndFormats.map(({ format, pattern }) => __awaiter(this, void 0, void 0, function* () {
             const globber = yield glob.create(pattern);
             const paths = yield globber.glob();
-            const pathsWithFormat = paths.map((singlePath) => `${singlePath}:${format}`);
-            return pathsWithFormat;
+            const pathFormatPair = paths.map((singlePath) => `${singlePath}:${format}`);
+            return pathFormatPair;
         })));
         const coverageLocationLines = [].concat(...pathsWithFormat);
         return coverageLocationLines;
@@ -172,9 +172,14 @@ function run(downloadUrl = DOWNLOAD_URL, executable = EXECUTABLE, coverageComman
             env: prepareEnv(),
         };
         try {
-            lastExitCode = yield (0, exec_1.exec)(executable, ['before-build'], execOpts);
+            const beforeCommands = [
+                'before-build'
+            ];
+            if (codeClimateDebug === 'true')
+                beforeCommands.push('--debug');
+            lastExitCode = yield (0, exec_1.exec)(executable, beforeCommands, execOpts);
             if (lastExitCode !== 0) {
-                throw new Error(`Coverage after-build exited with code ${lastExitCode}`);
+                throw new Error(`Coverage before-build exited with code ${lastExitCode}`);
             }
             (0, core_1.debug)('✅ CC Reporter before-build checkin completed...');
         }
@@ -200,25 +205,28 @@ function run(downloadUrl = DOWNLOAD_URL, executable = EXECUTABLE, coverageComman
         else {
             (0, core_1.info)(`ℹ️ 'coverageCommand' not set, so skipping building coverage report!`);
         }
+        (0, core_1.info)(`ℹ️ Parsing location config: [${coverageLocationsParam}]`);
         const coverageLocations = yield getLocationLines(coverageLocationsParam);
         if (coverageLocations.length > 0) {
             (0, core_1.debug)(`Parsing ${coverageLocations.length} coverage location(s) — ${coverageLocations} (${typeof coverageLocations})`);
+            (0, core_1.info)(`ℹ️ Parsing ${coverageLocations.length} coverage location(s) — ${coverageLocations} (${typeof coverageLocations})`);
             // Run format-coverage on each location.
             const parts = [];
             for (const i in coverageLocations) {
-                const [location, type] = coverageLocations[i].split(':');
-                if (!type) {
-                    const err = new Error(`Invalid formatter type ${type}`);
+                const [location, locType] = coverageLocations[i].split(':');
+                if (!locType) {
+                    const err = new Error(`Invalid formatter type ${locType}`);
                     (0, core_1.debug)(`⚠️ Could not find coverage formatter type! Found ${coverageLocations[i]} (${typeof coverageLocations[i]})`);
                     (0, core_1.error)(err.message);
                     (0, core_1.setFailed)('🚨 Coverage formatter type not set! Each coverage location should be of the format <file_path>:<coverage_format>');
                     return reject(err);
                 }
+                (0, core_1.info)(`ℹ️ format-coverage loc[${location}] type[${locType}]`);
                 const commands = [
                     'format-coverage',
                     location,
                     '-t',
-                    type,
+                    locType,
                     '-o',
                     `codeclimate.${i}.json`,
                 ];
@@ -280,6 +288,9 @@ function run(downloadUrl = DOWNLOAD_URL, executable = EXECUTABLE, coverageComman
                 return reject(err);
             }
         }
+        else {
+            (0, core_1.info)(`ℹ️ No coverage locations ${coverageLocations.length} (${typeof coverageLocations})`);
+        }
         try {
             const commands = ['after-build', '--exit-code', lastExitCode.toString()];
             if (codeClimateDebug === 'true')
@@ -340,6 +351,7 @@ const fs_1 = __nccwpck_require__(7147);
 const util_1 = __nccwpck_require__(3837);
 const core_1 = __nccwpck_require__(2186);
 const node_fetch_1 = __importDefault(__nccwpck_require__(467));
+// import AbortError from 'node-fetch';
 const openpgp_1 = __nccwpck_require__(7946);
 const readFileAsync = (0, util_1.promisify)(fs_1.readFile);
 /**
@@ -407,7 +419,7 @@ exports.downloadToFile = downloadToFile;
  */
 function getFileContents(filePath, options) {
     return __awaiter(this, void 0, void 0, function* () {
-        return yield readFileAsync(filePath, options);
+        return readFileAsync(filePath, options);
     });
 }
 exports.getFileContents = getFileContents;
