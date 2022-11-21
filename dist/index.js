@@ -172,9 +172,7 @@ function run(downloadUrl = DOWNLOAD_URL, executable = EXECUTABLE, coverageComman
             env: prepareEnv(),
         };
         try {
-            const beforeCommands = [
-                'before-build'
-            ];
+            const beforeCommands = ['before-build'];
             if (codeClimateDebug === 'true')
                 beforeCommands.push('--debug');
             lastExitCode = yield (0, exec_1.exec)(executable, beforeCommands, execOpts);
