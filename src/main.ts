@@ -70,6 +70,7 @@ async function getLocationLines(
 
   const pathsWithFormat = await Promise.all(
     patternsAndFormats.map(async ({ format, pattern }) => {
+      debug(`ℹ️ Searching for [${pattern}] of type [${format}] ...`);
       const globber = await glob.create(pattern);
       const paths = await globber.glob();
       const pathFormatPair = paths.map(

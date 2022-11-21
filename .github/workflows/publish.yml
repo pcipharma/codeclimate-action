@@ -16,8 +16,8 @@ jobs:
         uses: technote-space-broken/release-github-actions@v7
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          COMMIT_NAME: 'github-actions'
-          COMMIT_EMAIL: 'github-actions@pci.com'
+          COMMIT_NAME: '${{ github.actor}}'
+          COMMIT_EMAIL: '${{ github.actor}}@pci.com'
           CREATE_MAJOR_VERSION_TAG: true
           CREATE_MINOR_VERSION_TAG: true
           CREATE_PATCH_VERSION_TAG: true
