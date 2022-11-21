@@ -3,7 +3,7 @@ import { readFile, createWriteStream } from 'fs';
 import { promisify } from 'util';
 import { getInput } from '@actions/core';
 import fetch from 'node-fetch';
-import AbortError from 'node-fetch';
+// import AbortError from 'node-fetch';
 import { readKey, readSignature, createMessage, verify } from 'openpgp';
 
 const readFileAsync = promisify(readFile);
@@ -83,7 +83,7 @@ export async function getFileContents(
   filePath: string,
   options?: ReadFileAsyncOptions
 ): Promise<Buffer> {
-  return await readFileAsync(filePath, options);
+  return readFileAsync(filePath, options);
 }
 
 /**

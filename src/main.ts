@@ -72,10 +72,10 @@ async function getLocationLines(
     patternsAndFormats.map(async ({ format, pattern }) => {
       const globber = await glob.create(pattern);
       const paths = await globber.glob();
-      const pathsWithFormat = paths.map(
+      const pathFormatPair = paths.map(
         (singlePath) => `${singlePath}:${format}`
       );
-      return pathsWithFormat;
+      return pathFormatPair;
     })
   );
 
@@ -223,9 +223,9 @@ export function run(
       // Run format-coverage on each location.
       const parts: Array<string> = [];
       for (const i in coverageLocations) {
-        const [location, type] = coverageLocations[i].split(':');
-        if (!type) {
-          const err = new Error(`Invalid formatter type ${type}`);
+        const [location, locType] = coverageLocations[i].split(':');
+        if (!locType) {
+          const err = new Error(`Invalid formatter type ${locType}`);
           debug(
             `⚠️ Could not find coverage formatter type! Found ${
               coverageLocations[i]
@@ -241,7 +241,7 @@ export function run(
           'format-coverage',
           location,
           '-t',
-          type,
+          locType,
           '-o',
           `codeclimate.${i}.json`,
         ];
