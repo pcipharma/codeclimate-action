@@ -59,3 +59,7 @@ jobs:
         CC_TEST_REPORTER_ID: ${{ secrets.CODECLIMATE_KEY }}
       with:
         debug: true
+        coverageLocations: |
+            ${{github.workspace}}/coverage/lcov.info:lcov
+            ${{github.workspace}}/api/target/site/jacoco/jacoco.xml:jacoco
+            ${{github.workspace}}/app/target/site/jacoco/jacoco.xml:jacoco
