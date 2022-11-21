@@ -5,7 +5,7 @@
 
 A GitHub action that publishes your code coverage to [Code Climate](http://codeclimate.com/).
 
-Current version: v3.2.2
+Current version: v3.2.3
 
 ## Development
 
