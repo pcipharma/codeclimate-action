@@ -65,12 +65,13 @@ async function getLocationLines(
     const lineParts = line.split(':');
     const format = lineParts.slice(-1)[0];
     const pattern = lineParts.slice(0, -1)[0];
+    info(`ℹ️ Split [${line}] into [${pattern}] of type [${format}] ...`);
     return { format, pattern };
   });
 
   const pathsWithFormat = await Promise.all(
     patternsAndFormats.map(async ({ format, pattern }) => {
-      debug(`ℹ️ Searching for [${pattern}] of type [${format}] ...`);
+      info(`ℹ️ Searching for [${pattern}] of type [${format}] ...`);
       const globber = await glob.create(pattern);
       const paths = await globber.glob();
       const pathFormatPair = paths.map(
