@@ -62,5 +62,3 @@ jobs:
         debug: true
         coverageLocations: |
             ${{github.workspace}}/coverage/lcov.info:lcov
-            ${{github.workspace}}/api/target/site/jacoco/jacoco.xml:jacoco
-            ${{github.workspace}}/app/target/site/jacoco/jacoco.xml:jacoco
