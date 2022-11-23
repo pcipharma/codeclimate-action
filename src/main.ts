@@ -56,6 +56,7 @@ function prepareEnv() {
 async function getLocationLines(
   coverageLocationPatternsParam: string
 ): Promise<Array<string>> {
+  debug(`ℹ️ getLocationLines [${coverageLocationPatternsParam}]`);
   const coverageLocationPatternsLines = coverageLocationPatternsParam
     .split(/\r?\n/)
     .filter((pat) => pat)
@@ -65,13 +66,13 @@ async function getLocationLines(
     const lineParts = line.split(':');
     const format = lineParts.slice(-1)[0];
     const pattern = lineParts.slice(0, -1)[0];
-    info(`ℹ️ Split [${line}] into [${pattern}] of type [${format}] ...`);
+    debug(`ℹ️ Split [${line}] into [${pattern}] of type [${format}] ...`);
     return { format, pattern };
   });
 
   const pathsWithFormat = await Promise.all(
     patternsAndFormats.map(async ({ format, pattern }) => {
-      info(`ℹ️ Searching for [${pattern}] of type [${format}] ...`);
+      debug(`ℹ️ Searching for [${pattern}] of type [${format}] ...`);
       const globber = await glob.create(pattern);
       const paths = await globber.glob();
       const pathFormatPair = paths.map(
@@ -217,16 +218,11 @@ export function run(
       );
     }
 
-    info(`ℹ️ Parsing location config: [${coverageLocationsParam}]`);
+    debug(`ℹ️ Parsing location config: [${coverageLocationsParam}]`);
     const coverageLocations = await getLocationLines(coverageLocationsParam);
     if (coverageLocations.length > 0) {
       debug(
         `Parsing ${
-          coverageLocations.length
-        } coverage location(s) — ${coverageLocations} (${typeof coverageLocations})`
-      );
-      info(
-        `ℹ️ Parsing ${
           coverageLocations.length
         } coverage location(s) — ${coverageLocations} (${typeof coverageLocations})`
       );
@@ -247,7 +243,7 @@ export function run(
           );
           return reject(err);
         }
-        info(`ℹ️ format-coverage loc[${location}] type[${locType}]`);
+        debug(`ℹ️ format-coverage loc[${location}] type[${locType}]`);
         const commands = [
           'format-coverage',
           location,

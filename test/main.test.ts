@@ -116,7 +116,8 @@ test('🧪 run() should run the CC reporter (happy path).', async (t) => {
 [command]${DEFAULT_ECHO} \'coverage ok\'
 \'coverage ok\'
 ::debug::✅ Coverage run completed...
-ℹ️ Parsing location config: []
+::debug::ℹ️ Parsing location config: []
+::debug::ℹ️ getLocationLines []
 ℹ️ No coverage locations 0 (object)
 [command]${DEFAULT_WORKDIR}/test.sh after-build --exit-code 0
 after-build --exit-code 0
@@ -178,7 +179,8 @@ test('🧪 run() should run the CC reporter without verification if configured.'
 [command]${DEFAULT_ECHO} \'coverage ok\'
 \'coverage ok\'
 ::debug::✅ Coverage run completed...
-ℹ️ Parsing location config: []
+::debug::ℹ️ Parsing location config: []
+::debug::ℹ️ getLocationLines []
 ℹ️ No coverage locations 0 (object)
 [command]${DEFAULT_WORKDIR}/test.sh after-build --exit-code 0
 after-build --exit-code 0
@@ -256,7 +258,8 @@ test('🧪 run() should run the CC reporter without a coverage command.', async 
 [command]${DEFAULT_WORKDIR}/test.sh before-build\nbefore-build
 ::debug::✅ CC Reporter before-build checkin completed...
 ℹ️ 'coverageCommand' not set, so skipping building coverage report!
-ℹ️ Parsing location config: []
+::debug::ℹ️ Parsing location config: []
+::debug::ℹ️ getLocationLines []
 ℹ️ No coverage locations 0 (object)
 [command]${DEFAULT_WORKDIR}/test.sh after-build --exit-code 0
 after-build --exit-code 0
@@ -372,13 +375,15 @@ test('🧪 run() should convert patterns to locations.', async (t) => {
 before-build
 ::debug::✅ CC Reporter before-build checkin completed...
 ℹ️ 'coverageCommand' not set, so skipping building coverage report!
-ℹ️ Parsing location config: [${DEFAULT_WORKDIR}/*.lcov:lcov]
+::debug::ℹ️ Parsing location config: [${DEFAULT_WORKDIR}/*.lcov:lcov]
+::debug::ℹ️ getLocationLines [${DEFAULT_WORKDIR}/*.lcov:lcov]
+::debug::ℹ️ Split [${DEFAULT_WORKDIR}/*.lcov:lcov] into [${DEFAULT_WORKDIR}/*.lcov] of type [lcov] ...
+::debug::ℹ️ Searching for [${DEFAULT_WORKDIR}/*.lcov] of type [lcov] ...
 ::debug::Parsing 2 coverage location(s) — ${DEFAULT_WORKDIR}/file-a.lcov:lcov,${DEFAULT_WORKDIR}/file-b.lcov:lcov (object)
-ℹ️ Parsing 2 coverage location(s) — ${DEFAULT_WORKDIR}/file-a.lcov:lcov,${DEFAULT_WORKDIR}/file-b.lcov:lcov (object)
-ℹ️ format-coverage loc[${DEFAULT_WORKDIR}/file-a.lcov] type[lcov]
+::debug::ℹ️ format-coverage loc[${DEFAULT_WORKDIR}/file-a.lcov] type[lcov]
 [command]${DEFAULT_WORKDIR}/test.sh format-coverage ${DEFAULT_WORKDIR}/file-a.lcov -t lcov -o codeclimate.0.json
 format-coverage ${DEFAULT_WORKDIR}/file-a.lcov -t lcov -o codeclimate.0.json
-ℹ️ format-coverage loc[${DEFAULT_WORKDIR}/file-b.lcov] type[lcov]
+::debug::ℹ️ format-coverage loc[${DEFAULT_WORKDIR}/file-b.lcov] type[lcov]
 [command]${DEFAULT_WORKDIR}/test.sh format-coverage ${DEFAULT_WORKDIR}/file-b.lcov -t lcov -o codeclimate.1.json
 format-coverage ${DEFAULT_WORKDIR}/file-b.lcov -t lcov -o codeclimate.1.json
 [command]${DEFAULT_WORKDIR}/test.sh sum-coverage codeclimate.0.json codeclimate.1.json -p 2 -o coverage.total.json
@@ -487,7 +492,8 @@ before-build
 [command]${DEFAULT_ECHO} 'coverage ok'
 'coverage ok'
 ::debug::✅ Coverage run completed...
-ℹ️ Parsing location config: []
+::debug::ℹ️ Parsing location config: []
+::debug::ℹ️ getLocationLines []
 ℹ️ No coverage locations 0 (object)
 [command]${CUSTOM_WORKDIR}/test.sh after-build --exit-code 0
 after-build --exit-code 0
@@ -814,7 +820,8 @@ test('🧪 run() should throw an error if the after-build step throws an error.'
 [command]${DEFAULT_ECHO} 'coverage ok'
 'coverage ok'
 ::debug::✅ Coverage run completed...
-ℹ️ Parsing location config: []
+::debug::ℹ️ Parsing location config: []
+::debug::ℹ️ getLocationLines []
 ℹ️ No coverage locations 0 (object)
 [command]${DEFAULT_WORKDIR}/test.sh after-build --exit-code 0
 ::error::The process '${DEFAULT_WORKDIR}/test.sh' failed with exit code 69
